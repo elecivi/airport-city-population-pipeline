@@ -1,0 +1,22 @@
+# Temporary files
+*.tmp
+*.bak
+*.log
+
+# Alteryx temporary files
+*.yxmd.bak
+*.yxdb.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+
+# VS Code settings
+.vscode/
+
+# Large raw data files (optional)
+# Uncomment if needed later
+# data/raw/

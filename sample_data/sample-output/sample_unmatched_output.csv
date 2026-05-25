@@ -1,0 +1,16 @@
+airport_code,airport_icao,airport_name,airport_city,airport_country,airport_latitude,airport_longitude,airport_city_clean,airport_country_clean
+DGC,HADB,Degahbur,Baligubadle,ET,8.233333,43.583332,baligubadle,et
+OBX,AYOB,Obo,Muting,PG,-7.583,141.317001,muting,pg
+TUJ,,Tum,Bako,ET,5.833333,35.566666,bako,et
+MBE,RJEB,Monbetsu Airport,Mombetsu,JP,44.302545,143.405914,mombetsu,jp
+OMR,LROD,Oradea Airport,Nojorid,RO,47.027344,21.900626,nojorid,ro
+TLV,LLBG,Ben Gurion International Airport,Kefar Habad,IL,32.002714,34.880919,kefar habad,il
+HZH,ZUNP,Liping Airport,Longlisuo,CN,26.322492,109.150444,longlisuo,cn
+HHN,EDFH,Frankfurt - Hahn Airport,Lautzenhausen,DE,49.944633,7.26121,lautzenhausen,de
+BRQ,LKTB,Turany Airport,Slapanice,CZ,49.158261,16.690804,slapanice,cz
+RTM,EHRD,Rotterdam The Hague Airport,Delfshaven,NL,51.956336,4.437932,delfshaven,nl
+WGE,YWLG,Walgett,Lightning Ridge,AU,-30.032153,148.125423,lightning ridge,au
+PAN,VTSK,Pattani,Nong Chik,TH,6.785488,101.152769,nong chik,th
+NFB,,Detroit NAF,Capac,US,42.966667,-82.96667,capac,us
+EYR,O43,Yerington,Yerington,US,39.0,-119.25,yerington,us
+AAF,KAAF,Apalachicola Regional,Apalachicola,US,29.730236,-85.029645,apalachicola,us

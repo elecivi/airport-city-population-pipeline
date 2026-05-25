@@ -1,0 +1,1135 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2025.1" RunE2="T">
+  <Nodes>
+    <Node ToolID="36">
+      <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+        <Position x="1614" y="656" width="360" height="120" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Text>This workflow standardizes airport and city data, handles duplicates using population ranking, matches airports to cities, and exports unmatched records for QA transparency</Text>
+          <Font name="Baskerville Old Face" size="14.25" style="7" />
+          <TextColor name="Black" />
+          <FillColor name="White" />
+          <Shape shape="0" />
+          <Justification Justification="4" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="26">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="1733" y="77" width="398" height="501" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Outputs &amp; QA Checks</Caption>
+          <Style TextColor="#000000" FillColor="#adfe96" BorderColor="#00ff40" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Outputs &amp; QA Checks</AnnotationText>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="23">
+          <GuiSettings>
+            <Position x="1758" y="126" />
+          </GuiSettings>
+          <Properties>
+            <Configuration />
+            <Annotation DisplayMode="0">
+              <Name>Unmatched Airports Count</Name>
+              <DefaultAnnotationText>Unmatched Airports Count</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings Macro="CountRecords.yxmc" />
+        </Node>
+        <Node ToolID="18">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="1758" y="221" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="&quot;No exact city-country match&quot; " field="match_method" size="50" type="V_String" enabled="true" />
+                <FormulaField expression="&quot;Review&quot;" field="match_quality" size="20" type="V_String" enabled="true" />
+                <FormulaField expression="&quot;No matching city was found in SimpleMaps using standardized city name and IS02 country code.&quot;" field="validation_note" size="255" type="V_String" enabled="true" />
+                <FormulaField expression="&quot;Airport city may be missing, spelled differently, listed as suburb/district, or absent from the city reference dataset.&quot;" field="review_reason" size="255" type="V_String" enabled="true" />
+                <FormulaField expression="DateTimeNow()" field="run_date" size="19" type="DateTime" enabled="true" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Unmatched Airport Review Fields</Name>
+              <AnnotationText><![CDATA[
+]]></AnnotationText>
+              <DefaultAnnotationText>match_method = "No exact city-country match" 
+match_quality = "Review"
+validatio...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="17">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="1878" y="366" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="True" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="airport_code" selected="True" />
+                <SelectField field="airport_icao" selected="False" />
+                <SelectField field="airport_name" selected="True" />
+                <SelectField field="airport_city_key" selected="True" />
+                <SelectField field="airport_country_key" selected="True" />
+                <SelectField field="airport_city" selected="True" />
+                <SelectField field="airport_country" selected="True" />
+                <SelectField field="airport_latitude" selected="True" />
+                <SelectField field="airport_longitude" selected="True" />
+                <SelectField field="city_original" selected="True" />
+                <SelectField field="city_ascii" selected="True" />
+                <SelectField field="city_country_name" selected="True" />
+                <SelectField field="city_country" selected="True" />
+                <SelectField field="city_latitude" selected="True" />
+                <SelectField field="city_longitude" selected="True" />
+                <SelectField field="city_population" selected="True" />
+                <SelectField field="city_id" selected="True" />
+                <SelectField field="match_method" selected="True" />
+                <SelectField field="match_quality" selected="True" />
+                <SelectField field="coordinate_check" selected="True" />
+                <SelectField field="validation_note" selected="True" />
+                <SelectField field="run_date" selected="True" />
+                <SelectField field="city_key" selected="True" />
+                <SelectField field="city_country_key" selected="True" />
+                <SelectField field="airport_dq_status" selected="False" />
+                <SelectField field="city_dq_status" selected="False" />
+                <SelectField field="airport_location" selected="False" />
+                <SelectField field="airport_dq_flag" selected="False" />
+                <SelectField field="airport_has_coordinates" selected="False" />
+                <SelectField field="city_dq_flag" selected="False" />
+                <SelectField field="city_has_coordinates" selected="False" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="22">
+          <GuiSettings>
+            <Position x="1770" y="462" />
+          </GuiSettings>
+          <Properties>
+            <Configuration />
+            <Annotation DisplayMode="0">
+              <Name>Matched Airports Count</Name>
+              <DefaultAnnotationText>Matched Airports Count</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings Macro="CountRecords.yxmc" />
+        </Node>
+        <Node ToolID="16">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="1758" y="366" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="&quot;Exact city-country match&quot;" field="match_method" size="50" type="V_String" enabled="true" />
+                <FormulaField expression="&quot;High&quot;" field="match_quality" size="20" type="V_String" enabled="true" />
+                <FormulaField expression="&quot;Airport city matched exactly with SimpleMaps city_ascii within the same IS02 country.&quot;" field="validation_note" size="255" type="V_String" enabled="true" />
+                <FormulaField expression="DateTimeNow()" field="run_date" size="19" type="DateTime" enabled="true" />
+                <FormulaField expression="IF [airport_has_coordinates] = 0 OR [city_has_coordinates] = 0 THEN &quot;Coordinates unavailable&quot;&#xA;ELSEIF Abs([airport_latitude] - [city_latitude]) &lt;= 1 AND Abs([airport_longitude] - [city_longitude]) &lt;= 1 THEN &quot;Coordinates broadly aligned&quot;&#xA;ELSE &quot;Coordinates require review&quot;&#xA;ENDIF" field="coordinate_check" size="50" type="V_String" enabled="true" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Matched Records Audit Fields</Name>
+              <AnnotationText><![CDATA[
+]]></AnnotationText>
+              <DefaultAnnotationText>match_method = "Exact city-country match"
+match_quality = "High"
+validation_note...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="19">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="1878" y="222" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="True" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="airport_code" selected="True" />
+                <SelectField field="airport_icao" selected="True" />
+                <SelectField field="airport_name" selected="True" />
+                <SelectField field="airport_city" selected="True" />
+                <SelectField field="airport_country" selected="True" />
+                <SelectField field="airport_latitude" selected="True" />
+                <SelectField field="airport_longitude" selected="True" />
+                <SelectField field="airport_city_clean" selected="True" />
+                <SelectField field="airport_country_clean" selected="True" />
+                <SelectField field="airport_dq_flag" selected="True" />
+                <SelectField field="airport_has_coordinates" selected="True" />
+                <SelectField field="match_method" selected="True" />
+                <SelectField field="match_quality" selected="True" />
+                <SelectField field="review_reason" selected="True" />
+                <SelectField field="run_date" selected="True" />
+                <SelectField field="airport_city_key" selected="False" />
+                <SelectField field="airport_country_key" selected="False" />
+                <SelectField field="airport_dq_status" selected="False" />
+                <SelectField field="validation_note" selected="False" />
+                <SelectField field="airport_location" selected="False" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="21">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+            <Position x="1998" y="222" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <File MaxRecords="" FileFormat="19">C:\Users\eleon\OneDrive\Desktop\Work\Skailark\unmatched_airports_review.yxdb</File>
+              <Passwords />
+              <Disable>False</Disable>
+              <FormatSpecificOptions>
+                <WriteCompatibleVersion>False</WriteCompatibleVersion>
+                <NoSpatialIndex>False</NoSpatialIndex>
+                <SaveSource>True</SaveSource>
+                <SuppressBlankFile>False</SuppressBlankFile>
+              </FormatSpecificOptions>
+              <MultiFile value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Export Unmatched Data</Name>
+              <AnnotationText>Export Unmatched Data</AnnotationText>
+              <DefaultAnnotationText>Export Unmatched Data</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+        </Node>
+        <Node ToolID="20">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+            <Position x="2010" y="366" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <File MaxRecords="" FileFormat="19">C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airport_city_population_output.yxdb</File>
+              <Passwords />
+              <Disable>False</Disable>
+              <FormatSpecificOptions>
+                <WriteCompatibleVersion>False</WriteCompatibleVersion>
+                <NoSpatialIndex>False</NoSpatialIndex>
+                <SaveSource>True</SaveSource>
+                <SuppressBlankFile>False</SuppressBlankFile>
+              </FormatSpecificOptions>
+              <MultiFile value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Export Matched Data</Name>
+              <AnnotationText>Export Matched Data</AnnotationText>
+              <DefaultAnnotationText>Export Matched Data</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="25">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="989" y="65" width="726" height="497" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Data Quality &amp; Matching Logic</Caption>
+          <Style TextColor="#000000" FillColor="#fdd395" BorderColor="#ff8000" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Data Quality &amp; Matching Logic</AnnotationText>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="8">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="1050" y="198" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Mode>Simple</Mode>
+              <Simple>
+                <Operator>=</Operator>
+                <Field>airport_dq_flag</Field>
+                <Operands>
+                  <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+                  <DateType>fixed</DateType>
+                  <PeriodDate>2026-05-20 12:53:41</PeriodDate>
+                  <PeriodType>
+                  </PeriodType>
+                  <PeriodCount>0</PeriodCount>
+                  <Operand>Valid</Operand>
+                  <StartDate>2026-05-20 12:53:41</StartDate>
+                  <EndDate>2026-05-20 12:53:41</EndDate>
+                </Operands>
+              </Simple>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Filter Valid Airports</Name>
+              <DefaultAnnotationText>Filter Valid Airports</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="13">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="1242" y="138" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="airport_code" action="GroupBy" rename="airport_code" />
+                <SummarizeField field="airport_code" action="Count" rename="Count" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Count Airports</Name>
+              <AnnotationText>Count Airports</AnnotationText>
+              <DefaultAnnotationText>Count Airports</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+        </Node>
+        <Node ToolID="14">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="1410" y="114" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Mode>Simple</Mode>
+              <Simple>
+                <Operator>&gt;</Operator>
+                <Field>Count</Field>
+                <Operands>
+                  <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+                  <DateType>fixed</DateType>
+                  <PeriodDate>2026-05-20 15:02:19</PeriodDate>
+                  <PeriodType>
+                  </PeriodType>
+                  <PeriodCount>0</PeriodCount>
+                  <Operand>1</Operand>
+                  <StartDate>2026-05-20 15:02:19</StartDate>
+                  <EndDate>2026-05-20 15:02:19</EndDate>
+                </Operands>
+              </Simple>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Airport Count QA</Name>
+              <AnnotationText>Airport Count QA</AnnotationText>
+              <DefaultAnnotationText>Airport Count QA</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="15">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+            <Position x="1590" y="306" />
+          </GuiSettings>
+          <Properties>
+            <Configuration joinByRecordPos="False">
+              <JoinInfo connection="Left">
+                <Field field="airport_city_clean" />
+                <Field field="airport_country_clean" />
+              </JoinInfo>
+              <JoinInfo connection="Right">
+                <Field field="city_key_clean" />
+                <Field field="city_country_clean" />
+              </JoinInfo>
+              <SelectConfiguration>
+                <Configuration outputConnection="Join">
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="Left_airport_code" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_name" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_country" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_location" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_icao" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_city" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_city_key" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_country_key" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_longitude" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_latitude" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_dq_status" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_dq_flag" selected="True" input="Left_" />
+                    <SelectField field="Left_airport_has_coordinates" selected="True" input="Left_" />
+                    <SelectField field="Right_city_original" selected="True" input="Right_" />
+                    <SelectField field="Right_city_ascii" selected="True" input="Right_" />
+                    <SelectField field="Right_city_latitude" selected="True" input="Right_" />
+                    <SelectField field="Right_city_longitude" selected="True" input="Right_" />
+                    <SelectField field="Right_city_country_name" selected="True" input="Right_" />
+                    <SelectField field="Right_city_country" selected="True" input="Right_" />
+                    <SelectField field="Right_city_population" selected="True" input="Right_" />
+                    <SelectField field="Right_city_id" selected="True" input="Right_" />
+                    <SelectField field="Right_city_key" selected="True" input="Right_" />
+                    <SelectField field="Right_city_country_key" selected="True" input="Right_" />
+                    <SelectField field="Right_city_dq_status" selected="True" input="Right_" />
+                    <SelectField field="Right_city_dq_flag" selected="True" input="Right_" />
+                    <SelectField field="Right_city_has_coordinates" selected="True" input="Right_" />
+                    <SelectField field="*Unknown" selected="False" />
+                  </SelectFields>
+                </Configuration>
+              </SelectConfiguration>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Match Airport Cities</Name>
+              <AnnotationText>Match Airport Cities</AnnotationText>
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+        </Node>
+        <Node ToolID="10">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="1062" y="462" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Mode>Simple</Mode>
+              <Simple>
+                <Operator>=</Operator>
+                <Field>city_dq_flag</Field>
+                <Operands>
+                  <IgnoreTimeInDateTime>True</IgnoreTimeInDateTime>
+                  <DateType>fixed</DateType>
+                  <PeriodDate>2026-05-20 14:34:11</PeriodDate>
+                  <PeriodType>
+                  </PeriodType>
+                  <PeriodCount>0</PeriodCount>
+                  <Operand>Valid</Operand>
+                  <StartDate>2026-05-20 14:34:11</StartDate>
+                  <EndDate>2026-05-20 14:34:11</EndDate>
+                </Operands>
+              </Simple>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Filter Valid Cities</Name>
+              <AnnotationText>Filter Valid Cities</AnnotationText>
+              <DefaultAnnotationText>[city_dq_flag] = "Valid"</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="11">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
+            <Position x="1266" y="414" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SortInfo locale="1033">
+                <Field field="city_country_clean" order="Ascending" />
+                <Field field="city_key_clean" order="Ascending" />
+                <Field field="city_population" order="Descending" />
+              </SortInfo>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Prioritize Largest Cities</Name>
+              <AnnotationText>Prioritize Largest Cities</AnnotationText>
+              <DefaultAnnotationText>city_country_clean - Ascending
+city_key_clean - Ascending
+city_population - Descending</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSort" />
+        </Node>
+        <Node ToolID="12">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Unique.Unique">
+            <Position x="1410" y="414" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <UniqueFields>
+                <Field field="city_key_clean" />
+                <Field field="city_country_clean" />
+              </UniqueFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxUnique" />
+        </Node>
+        <Node ToolID="30">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1014" y="137" width="136" height="48" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Keep valid airport records only</Text>
+              <Font name="Arial Narrow" size="12" style="3" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="34">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1218" y="342" width="168" height="60" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Sort cities by population to resolve duplicate combinations</Text>
+              <Font name="Arial Narrow" size="12" style="3" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="35">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1542" y="234" width="148" height="60" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Core matching step: join airport records with city population data</Text>
+              <Font name="Arial Narrow" size="12" style="3" />
+              <TextColor name="Black" />
+              <FillColor r="255" g="255" b="128" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="24">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="0" y="77" width="943" height="501" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Input &amp; Cleaning</Caption>
+          <Style TextColor="#000000" FillColor="#fbdafe" BorderColor="#ff8080" Transparency="54" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <AnnotationText>Input &amp; Cleaning</AnnotationText>
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="1">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="73" y="197" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt</File>
+              <FormatSpecificOptions>
+                <HeaderRow>True</HeaderRow>
+                <IgnoreErrors>False</IgnoreErrors>
+                <AllowShareWrite>False</AllowShareWrite>
+                <ImportLine>1</ImportLine>
+                <FieldLen>254</FieldLen>
+                <SingleThreadRead>False</SingleThreadRead>
+                <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+                <Delimeter>,</Delimeter>
+                <QuoteRecordBreak>False</QuoteRecordBreak>
+                <CodePage>28591</CodePage>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Load Airports</Name>
+              <DefaultAnnotationText>Load Airports</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="code" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+                <Field name="time_zone_id" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+                <Field name="name" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+                <Field name="city_code" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+                <Field name="country_id" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+                <Field name="location" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+                <Field name="elevation" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+                <Field name="url" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+                <Field name="icao" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+                <Field name="city" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+                <Field name="county" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+                <Field name="state" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\airports.txt" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="2">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="103" y="462" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File RecordLimit="" SearchSubDirs="False" FileFormat="0" OutputFileName="">C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv</File>
+              <FormatSpecificOptions>
+                <HeaderRow>True</HeaderRow>
+                <IgnoreErrors>False</IgnoreErrors>
+                <AllowShareWrite>False</AllowShareWrite>
+                <ImportLine>1</ImportLine>
+                <FieldLen>254</FieldLen>
+                <SingleThreadRead>False</SingleThreadRead>
+                <IgnoreQuotes>DoubleQuotes</IgnoreQuotes>
+                <Delimeter>,</Delimeter>
+                <QuoteRecordBreak>False</QuoteRecordBreak>
+                <CodePage>28591</CodePage>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Load Cities</Name>
+              <AnnotationText>Load Cities</AnnotationText>
+              <DefaultAnnotationText>Load Cities</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="city" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv" type="V_String" />
+                <Field name="city_ascii" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv" type="V_String" />
+                <Field name="lat" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv" type="V_String" />
+                <Field name="lng" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv" type="V_String" />
+                <Field name="country" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv" type="V_String" />
+                <Field name="iso2" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv" type="V_String" />
+                <Field name="iso3" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv" type="V_String" />
+                <Field name="admin_name" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv" type="V_String" />
+                <Field name="capital" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv" type="V_String" />
+                <Field name="population" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv" type="V_String" />
+                <Field name="id" size="254" source="File: C:\Users\eleon\OneDrive\Desktop\Work\Skailark\worldcities.csv" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="3">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="257" y="198" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="code" selected="True" rename="airport_code" size="10" />
+                <SelectField field="name" selected="True" rename="airport_name" size="255" />
+                <SelectField field="country_id" selected="True" rename="airport_country" size="5" />
+                <SelectField field="location" selected="True" rename="airport_location" size="100" />
+                <SelectField field="icao" selected="True" rename="airport_icao" size="10" />
+                <SelectField field="city" selected="True" rename="airport_city" size="100" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Select Fields</Name>
+              <DefaultAnnotationText>Select Fields</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="4">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="438" y="198" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="LowerCase(Trim([airport_city]))&#xA;" field="airport_city_key" size="100" type="V_String" enabled="true" />
+                <FormulaField expression="UpperCase(Trim([airport_country]))&#xA;" field="airport_country_key" size="5" type="V_String" enabled="true" />
+                <FormulaField expression="IF IsNull([airport_location]) OR Trim([airport_location]) = &quot;&quot; THEN Null()&#xA;ELSE ToNumber(REGEX_Replace([airport_location], &quot;POINT \((-?[0-9]+\.?[0-9]*) (-?[0-9]+\.?[0-9]*)\)&quot;, &quot;$1&quot;))&#xA;ENDIF&#xA;" field="airport_longitude" size="8" type="Double" enabled="true" />
+                <FormulaField expression="IF IsNull([airport_location]) OR Trim([airport_location]) = &quot;&quot; THEN Null()&#xA;ELSE ToNumber(REGEX_Replace([airport_location], &quot;POINT \((-?[0-9]+\.?[0-9]*) (-?[0-9]+\.?[0-9]*)\)&quot;, &quot;$2&quot;))&#xA;ENDIF&#xA;" field="airport_latitude" size="8" type="Double" enabled="true" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Airport City/country Keys</Name>
+              <DefaultAnnotationText>Airport City/country Keys</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="7">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="798" y="198" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="IF IsNull([airport_code]) OR Trim([airport_code]) = &quot;&quot; THEN &quot;Missing airport code&quot; ELSEIF IsNull([airport_city]) OR Trim([airport_city]) = &quot;&quot; THEN &quot;Missing airport city&quot; ELSEIF IsNull([airport_country]) OR Trim([airport_country]) = &quot;&quot; THEN &quot;Missing airport country&quot; ELSEIF IsNull([airport_location]) OR Trim([airport_location]) = &quot;&quot; THEN &quot;Missing airport location&quot; ELSE &quot;Valid for matching&quot; ENDIF" field="airport_dq_status" size="100" type="V_String" enabled="true" />
+                <FormulaField expression="IF [airport_dq_status]=&quot;Valid for matching&quot; THEN &quot;Valid&quot; ELSE&quot;Review&quot; ENDIF&#xA;" field="airport_dq_flag" size="20" type="V_String" enabled="true" />
+                <FormulaField expression="IF IsNull([airport_latitude]) OR IsNull([airport_longitude]) THEN 0 ELSE 1 ENDIF " field="airport_has_coordinates" size="1" type="Bool" enabled="true" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Clean Airport Data</Name>
+              <DefaultAnnotationText>Clean Airport Data</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="5">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="283" y="461" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="city" selected="True" rename="city_original" size="100" />
+                <SelectField field="city_ascii" selected="True" size="100" />
+                <SelectField field="lat" selected="True" rename="city_latitude" type="Double" size="8" />
+                <SelectField field="lng" selected="True" rename="city_longitude" type="Double" size="8" />
+                <SelectField field="country" selected="True" rename="city_country_name" size="100" />
+                <SelectField field="iso2" selected="True" rename="city_country" size="5" />
+                <SelectField field="population" selected="True" rename="city_population" type="Double" size="8" />
+                <SelectField field="id" selected="True" rename="city_id" size="30" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Select Fields</Name>
+              <DefaultAnnotationText>Select Fields</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="6">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="450" y="462" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="LowerCase(Trim([city_ascii]))&#xA;" field="city_key" size="100" type="V_String" enabled="true" />
+                <FormulaField expression="UpperCase(Trim([city_country]))&#xA;" field="city_country_key" size="5" type="V_WString" enabled="true" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Create City Keys</Name>
+              <AnnotationText>Create City Keys</AnnotationText>
+              <DefaultAnnotationText>Create City Keys</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="9">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="798" y="462" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="iF IsNull([city_key]) OR Trim([city_key]) = &quot;&quot; THEN &quot;Missing city name&quot;&#xA;ELSEIF IsNull([city_country_key]) OR Trim([city_country_key]) = &quot;&quot; THEN &quot;Missing city country&quot;&#xA;ELSEIF IsNull([city_population]) THEN &quot;Missing city population&quot;&#xA;ELSE &quot;Valid for matching&quot;&#xA;ENDIF" field="city_dq_status" size="100" type="V_String" enabled="true" />
+                <FormulaField expression="IF [city_dq_status]=&quot;Valid for matching&quot; THEN &quot;Valid&quot; ELSE &quot;Review&quot; ENDIF" field="city_dq_flag" size="20" type="V_String" enabled="true" />
+                <FormulaField expression="IF IsNull([city_latitude]) OR IsNull([city_longitude]) THEN 0 ELSE 1 ENDIF" field="city_has_coordinates" size="1" type="Bool" enabled="true" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Clean City Data</Name>
+              <AnnotationText><![CDATA[Clean City Data
+]]></AnnotationText>
+              <DefaultAnnotationText>Clean City Data</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="27">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="25" y="137" width="144" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Airports source dataset</Text>
+              <Font name="Arial Narrow" size="12" style="3" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="28">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="221" y="138" width="132" height="47" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Keep required airport columns</Text>
+              <Font name="Arial Narrow" size="12" style="3" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="29">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="390" y="138" width="156" height="47" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Standardised names for matching</Text>
+              <Font name="Arial Narrow" size="12" style="3" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="31">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="762" y="138" width="156" height="47" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Remove formatting inconsistencies</Text>
+              <Font name="Arial Narrow" size="12" style="3" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="32">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="55" y="401" width="144" height="47" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>World cities population dataset</Text>
+              <Font name="Arial Narrow" size="12" style="3" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="37">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="618" y="197" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="Replace(&#xA;Replace(&#xA;Replace(&#xA;Replace(&#xA;Replace(&#xA;Replace(&#xA;Replace(&#xA;Replace(&#xA;LowerCase(Trim([airport_city_key])),&#xA;&quot;Ã±&quot;,&quot;ñ&quot;),&#xA;&quot;Ã©&quot;,&quot;é&quot;),&#xA;&quot;Ã¡&quot;,&quot;á&quot;),&#xA;&quot;Ã­&quot;,&quot;í&quot;),&#xA;&quot;Ã³&quot;,&quot;ó&quot;),&#xA;&quot;Ãº&quot;,&quot;ú&quot;),&#xA;&quot;Â&quot;,&quot;&quot;),&#xA;&quot;Ã&quot;,&quot;à&quot;)" field="airport_city_clean" size="255" type="V_String" enabled="true" />
+                <FormulaField expression="LowerCase(Trim([airport_country_key]))" field="airport_country_clean" size="2147483647" type="V_String" enabled="true" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Resolve Airports Encoding Issues</Name>
+              <AnnotationText><![CDATA[Resolve Airports Encoding Issues
+]]></AnnotationText>
+              <DefaultAnnotationText>airport_city_clean = Replace(
+Replace(
+Replace(
+Replace(
+Replace(
+Replace(
+Repla...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="38">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="582" y="126" width="144" height="60" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Normalize UTF-8 character inconsistencies</Text>
+              <Font name="Arial Narrow" size="12" style="3" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="39">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="642" y="462" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="Replace(&#xA;Replace(&#xA;Replace(&#xA;Replace(&#xA;Replace(&#xA;Replace(&#xA;Replace(&#xA;Replace(&#xA;LowerCase(Trim([city_key])),&#xA;&quot;Ã±&quot;,&quot;ñ&quot;),&#xA;&quot;Ã©&quot;,&quot;é&quot;),&#xA;&quot;Ã¡&quot;,&quot;á&quot;),&#xA;&quot;Ã­&quot;,&quot;í&quot;),&#xA;&quot;Ã³&quot;,&quot;ó&quot;),&#xA;&quot;Ãº&quot;,&quot;ú&quot;),&#xA;&quot;Â&quot;,&quot;&quot;),&#xA;&quot;Ã&quot;,&quot;à&quot;)" field="city_key_clean" size="255" type="V_String" enabled="true" />
+                <FormulaField expression="LowerCase(Trim([city_country_key]))" field="city_country_clean" size="255" type="V_String" enabled="true" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name>Resolve City Encoding Issues</Name>
+              <AnnotationText><![CDATA[Resolve City Encoding Issues
+]]></AnnotationText>
+              <DefaultAnnotationText>city_key_clean = Replace(
+Replace(
+Replace(
+Replace(
+Replace(
+Replace(
+Replace(
+...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+      </ChildNodes>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="19" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="17" Connection="Output" />
+      <Destination ToolID="20" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="16" Connection="Output" />
+      <Destination ToolID="17" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="19" Connection="Output" />
+      <Destination ToolID="21" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="True" />
+      <Destination ToolID="13" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="True" />
+      <Destination ToolID="15" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Unique" />
+      <Destination ToolID="15" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Output" />
+      <Destination ToolID="14" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Join" />
+      <Destination ToolID="16" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Left" />
+      <Destination ToolID="18" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Join" />
+      <Destination ToolID="22" Connection="Input8" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Left" />
+      <Destination ToolID="23" Connection="Input8" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="True" />
+      <Destination ToolID="11" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="37" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="Output" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Output" />
+      <Destination ToolID="6" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="6" Connection="Output" />
+      <Destination ToolID="39" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="37" Connection="Output" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="39" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <DefaultTZ value="Local" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <IsTemplate value="False" />
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>VILLA_airport_city_population-workflow</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="20b6501a-7de0-4ffe-8130-82c2b8d19f87" />
+      <Telemetry>
+        <PreviousWorkflowId value="2576568f-704b-4292-b5df-5b70adda3f1d" />
+        <OriginWorkflowId value="8c756bfe-2e83-486f-af73-c79726500402" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
