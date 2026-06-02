@@ -69,8 +69,8 @@ The workflow follows these main steps:
 
 1. Import airport and city datasets
 2. Clean and standardize location fields, in order to create keys for the matching
-3. Normalize naming inconsistencies
-4. Extract latitude and longitude information
+3. Normalize naming inconsistencies and extract airport coordinates
+4. Perform airport data quality checks
 5. Join airport records with city information
 6. Separate matched and unmatched results, and count them
 7. Export structured final datasets
@@ -455,7 +455,145 @@ This field can later be used for:
 - mapping workflows
 - coordinate completeness analysis
 
-## 4.
+---
+
+## 4. Airport Data Quality Checks
+
+### Purpose
+At this stage, the workflow performs additional quality assurance checks before entering the matching tool.
+
+The goal is to make sure that only valid airport records continue through the workflow and to identify any unexpected duplicate airport codes that could negatively impact the matching process.
+
+As step 3, this step is divided into two independent streams as well:
+
+- Airport Stream
+- City Stream
+
+---
+
+### Airport Stream
+
+The airport branch performs a final validation pass on the cleaned airport dataset.
+
+The stream:
+
+1. Keeps only valid airport records.
+2. Counts occurrences of each airport code.
+3. Identifies duplicate airport codes for quality assurance purposes.
+
+---
+
+#### Tool 1 — Filter Valid Airports
+
+##### Purpose
+
+This tool filters the cleaned airport dataset and allows only records marked as valid to continue through the workflow.
+
+Any records previously flagged as invalid during the cleaning process are excluded from the matching logic.
+
+##### Why this is important
+
+Matching invalid airport records against city data would introduce unnecessary noise and potentially generate incorrect matches.
+
+By filtering invalid records early, the workflow improves overall reliability and reduces downstream processing complexity.
+
+##### Filter Condition
+
+```text
+airport_dq_flag = "Valid"
+```
+
+##### Output
+
+- **True Output** → Valid airport records continue through the workflow.
+- **False Output** → Invalid airport records are excluded.
+
+---
+
+#### Tool 2 — Count Airports
+
+##### Purpose
+
+This Summarize tool performs a quality assurance check by counting how many times each airport code appears within the valid airport dataset.
+
+The tool groups records by airport code and calculates the total number of occurrences.
+
+##### Why this is important
+
+Airport codes should normally be unique identifiers.
+
+If the same airport code happens to appear multiple times, it may indicate:
+
+- duplicated source records;
+- import issues;
+- data quality problems;
+- inconsistent airport master data.
+
+Detecting these situations early helps ensure cleaner matching results.
+
+##### Configuration
+
+```text
+Group By:
+airport_code
+
+Count:
+airport_code
+```
+
+##### Output
+
+The tool generates one record per airport code and a count showing how many times that code appears within the valid airport dataset.
+
+---
+
+#### Tool 3 — Airport Count QA
+
+##### Purpose
+
+This filter identifies airport codes that appear more than once in the valid airport dataset.
+
+Only airport codes with duplicate occurrences pass through the True output.
+
+##### Why this is important
+
+Even if this was not a specifically required step during this job, duplicate airport codes should be investigated before matching begins.
+
+Although duplicates may not always cause matching failures, they can create:
+
+- duplicate matched records;
+- inaccurate reporting;
+- inflated output counts;
+- ambiguous matching results.
+
+This QA step provides visibility into potential issues before the join process is executed.
+
+##### Filter Condition
+
+```text
+Count > 1
+```
+
+##### Output
+
+- **True Output** → Duplicate airport codes requiring review.
+- **False Output** → Airport codes appearing only once.
+
+---
+
+### Airport Stream Output
+
+At the end of this step:
+
+- only valid airport records continue into the matching process;
+- duplicate airport codes are isolated for quality assurance review;
+- the airport dataset is verified before entering the join logic.
+
+---
+
+### City Stream
+
+---
 
 ## 5. Join Airport Records with City Information
 
