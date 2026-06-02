@@ -471,7 +471,7 @@ As step 3, this step is divided into two independent streams as well:
 
 ---
 
-### Airport Stream
+## Airport Stream
 
 The airport branch performs a final validation pass on the cleaned airport dataset.
 
@@ -483,42 +483,42 @@ The stream:
 
 ---
 
-#### Tool 1 — Filter Valid Airports
+### Tool 1 — Filter Valid Airports
 
-##### Purpose
+#### Purpose
 
 This tool filters the cleaned airport dataset and allows only records marked as valid to continue through the workflow.
 
 Any records previously flagged as invalid during the cleaning process are excluded from the matching logic.
 
-##### Why this is important
+#### Why this is important
 
 Matching invalid airport records against city data would introduce unnecessary noise and potentially generate incorrect matches.
 
 By filtering invalid records early, the workflow improves overall reliability and reduces downstream processing complexity.
 
-##### Filter Condition
+#### Filter Condition
 
 ```text
 airport_dq_flag = "Valid"
 ```
 
-##### Output
+#### Output
 
 - **True Output** → Valid airport records continue through the workflow.
 - **False Output** → Invalid airport records are excluded.
 
 ---
 
-#### Tool 2 — Count Airports
+### Tool 2 — Count Airports
 
-##### Purpose
+#### Purpose
 
 This Summarize tool performs a quality assurance check by counting how many times each airport code appears within the valid airport dataset.
 
 The tool groups records by airport code and calculates the total number of occurrences.
 
-##### Why this is important
+#### Why this is important
 
 Airport codes should normally be unique identifiers.
 
@@ -531,7 +531,7 @@ If the same airport code happens to appear multiple times, it may indicate:
 
 Detecting these situations early helps ensure cleaner matching results.
 
-##### Configuration
+#### Configuration
 
 ```text
 Group By:
@@ -541,21 +541,21 @@ Count:
 airport_code
 ```
 
-##### Output
+#### Output
 
 The tool generates one record per airport code and a count showing how many times that code appears within the valid airport dataset.
 
 ---
 
-#### Tool 3 — Airport Count QA
+### Tool 3 — Airport Count QA
 
-##### Purpose
+#### Purpose
 
 This filter identifies airport codes that appear more than once in the valid airport dataset.
 
 Only airport codes with duplicate occurrences pass through the True output.
 
-##### Why this is important
+#### Why this is important
 
 Even if this was not a specifically required step during this job, duplicate airport codes should be investigated before matching begins.
 
@@ -568,20 +568,20 @@ Although duplicates may not always cause matching failures, they can create:
 
 This QA step provides visibility into potential issues before the join process is executed.
 
-##### Filter Condition
+#### Filter Condition
 
 ```text
 Count > 1
 ```
 
-##### Output
+#### Output
 
 - **True Output** → Duplicate airport codes requiring review.
 - **False Output** → Airport codes appearing only once.
 
 ---
 
-### Airport Stream Output
+#### Airport Stream Output
 
 At the end of this step:
 
