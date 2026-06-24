@@ -79,8 +79,72 @@ The workflow follows these main steps:
 
 # Detailed Workflow Explanation
 
-## 1.
+## 1. Import Airport and City Datasets
+
+The first step of the workflow is to import the two datasets required for the airport-to-city matching process:
+
+### Airport Branch
+
+The airport data was provided by the company that assigned me this task, as a TXT file specifically for this case study
+
+#### Example Structure
+
+| Airport Name | IATA | ICAO | City | Country |
+|-------------|------|------|------|---------|
+| Munich Airport | MUC | EDDM | Munich | Germany |
+| London Heathrow Airport | LHR | EGLL | London | United Kingdom |
+| John F. Kennedy International Airport | JFK | KJFK | New York | United States |
+
+*Example data shown for documentation purposes only. See the Sample Data folder for more details*
+
+#### Alteryx Tool Used
+
+**Input Data Tool**
+
+The Input Data tool was used to import the TXT file into Alteryx and create the airport data stream that is processed throughout the workflow.
+
+#### Output
+
+The result of this step is a raw airport dataset loaded into Alteryx and ready for cleaning, standardization, and key generation in the following workflow steps.
+- when using Alteryx, a preview of the file is visible in the bottom-left pane 
+
+---
+
+### City Branch
+
+#### Source
+
+The city data was downloaded from the SimpleMaps World Cities dataset:
+
+https://simplemaps.com/data/world-cities
+
+This dataset contains city names, country information, population data, and geographic coordinates for cities around the world.
+
+#### Example Structure
+
+| City | Country | Population | Latitude | Longitude |
+|--------|---------|-----------:|----------:|-----------:|
+| Munich | Germany | 1488202 | 48.1374 | 11.5755 |
+| London | United Kingdom | 9540576 | 51.5072 | -0.1276 |
+| New York | United States | 18908608 | 40.6943 | -73.9249 |
+
+*Example data shown for documentation purposes only. See the Sample Data folder for more details*
+
+#### Alteryx Tool Used
+
+**Input Data Tool**
+
+As in the other branch, the Input Data tool was used to import the CSV file into Alteryx and create the city data stream used later in the matching process
+
+#### Output
+
+The result of this step is a raw city dataset loaded into Alteryx and ready for filtering, deduplication, and standardization in subsequent workflow stages.
+
+---
+
 ## 2.
+
+
 ## 3. Normalize naming inconsistencies
 
 Before joining the airport and city datasets, the workflow applies multiple cleaning and normalization steps in order to improve match quality and reduce inconsistencies between records.
